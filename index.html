@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Vehicles-HangMan</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="author" content="Deepika Vikas">
+    <meta name="description" content="Vehicles-HangMan game">
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <!--<script type="text/javascript" src="./assets/javascript/game.js"></script>-->
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <h2>Vehicles - Hangman Game</h2>
+        </div>
+    </nav>
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col-md-3 score_column">
+                <p>Wins: <span id="no_of_wins"></span></p>
+                <p>Loses: <span id="no_of_loses"></span></p>
+            </div>
+            <div class="col-md-6 game_column">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><span id="wordGuess"></p>
+                            
+                        </div>
+                        <div class="col-lg-8">
+                            <p>Letters already guessed: <span id="letters_guessed"> </span></p>
+                            <p>You have <span id="no_of_guesses"></span> guesses left!!</p>
+                            <p id="wrong_key"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="push"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <footer class="footer">
+                    <div class="container">
+                        <p class="text-muted">Designed & Programmed by Deepika Vikas</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var vehicles = ['airplane', 'ambulance', 'boat'];
+    var randomWordIndex = Math.floor((Math.random()) * vehicles.length);
+    var sysWord = vehicles[randomWordIndex];
+    var displayWord = sysWord.split("");
+
+    var screenWord = [];
+
+    var totalGuessCount = 12;
+    var guessMade = 0;
+
+
+    for (let i = 0; i < displayWord.length; i++) {
+        screenWord.push(sysWord[i].replace(sysWord[i], "_"));
+    }
+
+    document.querySelector("#wordGuess").innerHTML = screenWord.join(" ");
+    document.querySelector("#no_of_guesses").innerHTML = totalGuessCount;
+    var letters_guessed = [];
+    var guessLeft = totalGuessCount - guessMade;
+    var wins = 0;
+    var loses = 0;
+
+    document.onkeyup = function(event) {
+        keyPressed = event.key;
+        //Key other than alphabets or wrong alphabets repeated
+        document.querySelector("#wrong_key").innerHTML = "";
+        var wrongLetterRepeat = false;
+
+
+
+        function checkWin() {
+            if (screenWord.indexOf("_") === -1) {
+                wins++;
+                document.querySelector("#wrong_key").innerHTML = "You win!!";
+                document.querySelector("#no_of_wins").innerHTML = wins;
+                chooseWord();
+            }
+        }
+
+        function checkLose() {
+            if (screenWord.indexOf("_") !== -1) {
+                loses++;
+                document.querySelector("#no_of_loses").innerHTML = loses;
+                chooseWord();
+            }
+
+        }
+
+        function chooseWord() {
+            randomWordIndex = Math.floor((Math.random()) * vehicles.length);
+            sysWord = vehicles[randomWordIndex];
+            displayWord = sysWord.split("");
+            screenWord = [];
+            totalGuessCount = 12;
+            guessMade = 0;
+            letters_guessed = [];
+            guessLeft = totalGuessCount - guessMade;
+
+
+            for (let i = 0; i < displayWord.length; i++) {
+                screenWord.push(sysWord[i].replace(sysWord[i], "_"));
+            }
+
+            document.querySelector("#wordGuess").innerHTML = screenWord.join(" ");
+        }
+
+
+        if (guessLeft != 0) {
+            //checking if keyPressed is an alphabet
+            if ((event.keyCode >= 97 && event.keyCode <= 122) || (event.keyCode >= 65 && event.keyCode <= 90)) {
+                //checking if keyPressed is in the word selected by the system
+                for (let i = 0; i < displayWord.length; i++) {
+                    keyPressed = keyPressed.toLowerCase();
+                    if (keyPressed === displayWord[i]) {
+                        screenWord[i] = keyPressed;
+                        document.querySelector("#wordGuess").innerHTML = screenWord.join(" ");
+                        checkWin();
+                        
+                    }
+                }
+                //checking if keyPressed is not in the word selected by the system
+                if (displayWord.indexOf(keyPressed) === -1) {
+                    //checking if keyPressed is already pressed
+                    for (let i = 0; i < letters_guessed.length; i++) {
+                        keyPressed = keyPressed.toLowerCase();
+                        if (keyPressed === letters_guessed[i]) {
+                            document.querySelector("#wrong_key").innerHTML = letters_guessed[i] + " is already pressed. Enter a different letter.";
+                            wrongLetterRepeat = true;
+                        }
+                    }
+                    //adding wrong keyPressed to the letters_guessed array
+                    if (wrongLetterRepeat == false) {
+                        letters_guessed.push(keyPressed);
+                        document.querySelector("#letters_guessed").innerHTML = letters_guessed;
+                        guessLeft = totalGuessCount - guessMade;
+                        guessMade++;
+                        document.querySelector("#no_of_guesses").innerHTML = guessLeft;
+                    }
+                }
+            } else {
+                document.querySelector("#wrong_key").innerHTML = "Enter alphabets only";
+
+            }
+        } else {
+            checkWin();
+            checkLose();
+            guessMade = 0;
+
+        }
+    }
+    </script>
+</body>
+
+</html>

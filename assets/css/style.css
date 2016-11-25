@@ -1,0 +1,45 @@
+body{
+	background-image: url("../images/vehicles_backgrnd.jpg"); 
+}
+
+.footer {
+    text-align: center;
+    background-color: #666666;
+    padding: 20px;
+    border-top: #4aaaa5 solid 4px;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 11px;
+    color: #ffffff;
+    height: 35px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 20px;
+}
+
+.score_column{
+	background-color: #ffffff;
+	width: 250px;
+	margin:0 auto;
+	margin-right: 100px;
+	height:400px;
+}
+
+.game_column{
+	background-color: yellow;
+	width:650px;
+	height: 400px;
+}
+
+.wrapper {
+	align-items: center;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.push {
+    height: 35px;
+}
