@@ -1,6 +1,49 @@
-body{
-	background-image: url("../images/vehicles_backgrnd.jpg"); 
+@import url(https://fonts.googleapis.com/css?family=Bungee+Inline|Open+Sans+Condensed:300);
+html{
+    width: 100%;
+    height: 100%;
+    margin:0 auto;
+    float: none;
 }
+body{
+    background-image: url("../images/vehicles_backgrnd.jpg"); 
+    margin:0 auto;
+    float: none;
+    width: 100%;
+    align-content: center;
+    font-family: 'Open Sans Condensed';
+    font-size: 20px;
+}
+
+.navbar {
+    background-image: url("../images/road.jpg");
+    background-position: center;
+    text-align:center;
+    width: 100%;
+    margin:0 auto;
+    float: none;
+}
+
+#img_inline {
+
+    display: inline;
+    float: left;
+    margin:20px;
+
+}
+
+#img_display{
+    width: 100px;
+    height: 100px;
+    
+
+}
+
+h2{
+    font-family: 'Bungee Inline';
+
+}
+
 
 .footer {
     text-align: center;
@@ -18,26 +61,56 @@ body{
     margin-top: 20px;
 }
 
+
+
+.col_centered{
+    margin:0 auto;
+    float: none;
+}
+
 .score_column{
-	background-color: #ffffff;
-	width: 250px;
-	margin:0 auto;
-	margin-right: 100px;
-	height:400px;
+    background-color: #ffffff;
+    width: 300px;
+    margin:0 auto;
+    float:none;
+    font-family: 'Bungee Inline';
+    text-align:center;
+    display: inline-block;
+    margin-left: 200px;
+    margin-top: 20px;
+    
 }
 
 .game_column{
-	background-color: yellow;
-	width:650px;
-	height: 400px;
+    background-color: #beeb9f;
+    /*width:700px;*/
+    height: 250px;
+    float: none;
+    margin:0 auto;
+    padding-top:30px; 
+    margin-top: 20px;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    align-content: center;
+
+}
+
+#no_of_guesses, #wordGuess, #letters_guessed{
+    font-family: 'Bungee Inline';
+}
+
+#wrong_key{
+    color:red;
+    font-weight: bold;
+
 }
 
 .wrapper {
-	align-items: center;
+    align-content:center;
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -4em;
+    margin: 0 auto;
 }
 
 .push {
