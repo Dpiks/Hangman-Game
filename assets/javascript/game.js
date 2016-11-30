@@ -38,6 +38,30 @@
       "./assets/images/truck.png"
 
   ]
+
+  var sounds = {
+      letter_right: {
+          sound: new Howl({
+              urls: ['./assets/sounds/letter_right.wav'],
+          })
+      },
+      letter_wrong: {
+          sound: new Howl({
+              urls: ['./assets/sounds/letter_wrong.wav'],
+          })
+      },
+      game_win: {
+          sound: new Howl({
+              urls: ['./assets/sounds/game_win.wav'],
+          })
+      },
+      game_lost: {
+          sound: new Howl({
+              urls: ['./assets/sounds/game_lost.wav'],
+          })
+      }
+
+  }
   var randomWordIndex = Math.floor((Math.random()) * vehicles.length);
   var sysWord = vehicles[randomWordIndex];
   var displayWord = sysWord.split("");
@@ -81,6 +105,7 @@
               wins++;
               document.querySelector("#wrong_key").innerHTML = "You win!! Keep driving!! \n Enter 'spacebar' to continue";
               document.querySelector("#no_of_wins").innerHTML = wins;
+              sounds.game_win.sound.play();
               displayImage(randomWordIndex);
 
 
@@ -92,6 +117,7 @@
               loses++;
               document.querySelector("#wrong_key").innerHTML = "You loose!! Better luck next time. \n Enter 'spacebar' to continue";
               document.querySelector("#no_of_loses").innerHTML = loses;
+              sounds.game_lost.sound.play();
               document.querySelector("#wordGuess").innerHTML = sysWord;
               displayImage(randomWordIndex);
 
@@ -146,6 +172,8 @@
                   if (keyPressed === displayWord[i]) {
                       screenWord[i] = keyPressed;
                       document.querySelector("#wordGuess").innerHTML = screenWord.join(" ");
+                      sounds.letter_right.sound.play();
+
                       checkWin();
 
                   }
@@ -157,6 +185,7 @@
                       keyPressed = keyPressed.toLowerCase();
                       if (keyPressed === letters_guessed[i]) {
                           document.querySelector("#wrong_key").innerHTML = letters_guessed[i] + " is already pressed. Enter a different letter.";
+                          sounds.letter_wrong.sound.play();
                           wrongLetterRepeat = true;
                       }
                   }
@@ -164,6 +193,7 @@
                   if (wrongLetterRepeat == false) {
                       letters_guessed.push(keyPressed);
                       document.querySelector("#letters_guessed").innerHTML = letters_guessed;
+                      sounds.letter_wrong.sound.play();
 
                       guessMade++;
                       guessLeft = totalGuessCount - guessMade;
