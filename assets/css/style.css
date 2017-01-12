@@ -3,12 +3,12 @@ html{
     width: 100%;
     height: 100%;
     margin:0 auto;
-    float: none;
+    /*float: none;*/
 }
 body{
     background-image: url("../images/vehicles_backgrnd.jpg"); 
     margin:0 auto;
-    float: none;
+    /*float: none;*/
     width: 100%;
     align-content: center;
     font-family: 'Open Sans Condensed';
@@ -21,27 +21,20 @@ body{
     text-align:center;
     width: 100%;
     margin:0 auto;
-    float: none;
+    /*float: none;*/
 }
 
 #img_inline {
-
-    display: inline;
-    float: left;
     margin:20px;
-
 }
 
 #img_display{
     width: 100px;
     height: 100px;
-    
-
 }
 
 h2{
     font-family: 'Bungee Inline';
-
 }
 
 
@@ -84,7 +77,6 @@ h2{
 
 .game_column{
     background-color: #beeb9f;
-    /*width:700px;*/
     height: 300px;
     float: none;
     margin:0 auto;
@@ -106,14 +98,11 @@ h2{
 
 }
 
-.wrapper {
+/*.wrapper {
     align-content:center;
     min-height: 100%;
-    height: auto !important;
+    height: auto;   
     height: 100%;
     margin: 0 auto;
-}
+}*/
 
-.push {
-    height: 35px;
-}
